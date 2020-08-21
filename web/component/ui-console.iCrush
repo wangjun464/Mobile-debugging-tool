@@ -1,0 +1,11 @@
+<template>
+    <div class="view">
+        console
+    </div>
+</template>
+
+<style>
+    div.view{
+        
+    }
+</style>

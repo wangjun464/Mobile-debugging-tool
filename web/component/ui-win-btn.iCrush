@@ -1,0 +1,71 @@
+<!--
+    @author 心叶(yelloxing)
+    2020年6月8日于大同
+-->
+<template>
+    <ul>
+        <li @click='emit("minimize")'>最小化</li>
+        <li @click='emit("maximize")' ctrl-show:no="isMaximize">最大化</li>
+        <li @click='emit("unmaximize")' ctrl-show:yes="isMaximize">自由大小</li>
+        <li @click='emit("quit")'>关闭</li>
+    </ul>
+</template>
+<script>
+
+    export default {
+        data() {
+            return {
+                isMaximize: "no"
+            };
+        },
+        mounted() {
+
+            nodeRequire('electron').ipcRenderer
+
+                // 监听到窗口最大化
+                .on("maximize", () => { this.isMaximize = 'yes'; })
+
+                // 监听到窗口可缩放
+                .on("unmaximize", () => { this.isMaximize = 'no'; });
+
+        }
+    };
+
+</script>
+<style>
+    ul {
+        &>li {
+            display: inline-block;
+            background-image: url('../assets/images/win-btn.png');
+            font-size: 0;
+            vertical-align: top;
+            width: .45rem;
+            background-position-y: center;
+
+            &:hover {
+                background-color: #c7c6c6;
+            }
+
+            &:nth-child(1) {
+                background-position-x: 1px;
+            }
+
+            &:nth-child(2) {
+                background-position-x: 87px;
+            }
+
+            &:nth-child(3) {
+                background-position-x: 124px;
+            }
+
+            &:nth-child(4) {
+                background-position-x: 42px;
+
+                &:hover {
+                    background-image: url('../assets/images/win-btn@white.png');
+                    background-color: red;
+                }
+            }
+        }
+    }
+</style>

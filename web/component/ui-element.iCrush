@@ -1,0 +1,72 @@
+<template>
+    <div class="view">
+        <div class="content">
+            element主体显示区域
+        </div>
+        <div move-line:horizontal='initSize'></div>
+        <div class="styleShow">
+            <div class="style">
+                <ui-style></ui-style>
+            </div>
+            <div class="styleContent">
+                <ui-style-content></ui-style-content>
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+
+    //当前页面用到的局部组件
+    import uiStyle from './ui-style.iCrush';/*元素样式界面显示*/
+    import uiStyleContent from './ui-style-content.iCrush';
+    
+    import image2D from 'image2d';
+
+    export default {
+        data() {
+            return {
+                initSize: ["normal", "calc(100vw - 6rem)"]
+            };
+        },
+        mounted() {
+
+        },
+        component: { uiStyle,uiStyleContent },
+        methods:{
+
+        }
+    }
+</script>
+<style>
+    div.view {
+        height: calc(100vh - .6rem);
+
+        &>div {
+            display: inline-block;
+            height: 100%;
+            vertical-align: top;
+        }
+
+        &>.content {
+            width: 2.9rem;
+            background-color: aqua;
+        }
+
+        &>.styleShow {
+            
+            width: calc(100vw - 6rem);
+            
+
+            &>.style {
+                background-color: #ededf0;
+                width: calc(100%+5px);
+                margin-left: -5px;
+                overflow-x: auto;
+                overflow-y: hidden;
+                height: .3rem;
+            }
+
+            
+        }
+    }
+</style>

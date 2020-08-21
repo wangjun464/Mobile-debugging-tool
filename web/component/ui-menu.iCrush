@@ -1,0 +1,94 @@
+<template>
+    <ul class='view'>
+        <li>
+            操作
+            <ul>
+                <li @click='trigger("phoneConnect")'>
+                    连接手机
+                    <em>Ctrl+N</em>
+                </li>
+                <li class='line'></li>
+                <li>
+                    刷新
+                    <em>Ctrl+F5</em>
+                </li>
+            </ul>
+        </li>
+        <li>
+            帮助
+            <ul>
+                <li>关于我们</li>
+            </ul>
+        </li>
+    </ul>
+</template>
+<style>
+    ul.view {
+        &>li {
+            display: inline-block;
+            vertical-align: top;
+            position: relative;
+            padding: 0 .1rem;
+            font-size: 12px;
+
+            &:hover {
+                background-color: rgb(186, 190, 194);
+
+                &>ul {
+                    display: block;
+                }
+            }
+
+            ul {
+                background-color: rgb(237, 239, 241);
+                border: 1px solid rgb(230, 216, 216);
+                width: 2.6rem;
+                box-shadow: 0px 1px 3px #c5c5c7;
+                display: none;
+
+                li {
+                    line-height: .26rem;
+                    margin-top: .05rem;
+                    padding: 0 .2rem;
+                    position: relative;
+
+                    &>em {
+                        position: absolute;
+                        right: .2rem;
+                        font-style: normal;
+                    }
+
+                    &:last-child {
+                        margin-bottom: .05rem;
+                    }
+
+                    &:hover:not(.line) {
+                        background-color: rgb(205, 218, 186);
+                    }
+
+                    &.line {
+                        height: 1px;
+                        width: 2.4rem;
+                        margin-left: .1rem;
+                        background-color: #c5c5c7;
+                    }
+                }
+            }
+
+            &>ul {
+                position: absolute;
+                left: -.01rem;
+                z-index: 1;
+
+                &>li {
+
+                    &>ul {
+                        position: absolute;
+                        top: 0;
+                        left: 2.58rem;
+                    }
+                }
+            }
+        }
+    }
+</style>

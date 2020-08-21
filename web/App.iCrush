@@ -1,0 +1,154 @@
+<template>
+    <div class='view' ctrl-body-class:notFocus='notFocus'>
+        <div class="menu">
+            <div class="title" style="-webkit-app-region: drag">
+                Mobile Debugging Tool
+            </div>
+            <div class="left" style="-webkit-app-region: no-drag">
+                <!-- 顶部菜单 -->
+                <ui-menu></ui-menu>
+            </div>
+            <div class="right" style="-webkit-app-region: no-drag">
+                <ui-win-btn></ui-win-btn>
+            </div>
+        </div>
+        <div class="content">
+            <div class="phoneShow">
+                <ui-phone-show></ui-phone-show>
+            </div>
+            <div class="debugShow">
+                <!-- 上面功能的切换 -->
+                <div class="switch">
+                    <ui-switch></ui-switch>
+                </div>
+                <div class="function">
+                    <!-- 通过功能切换可以切换到element或console等 -->
+                    <div ctrl-show:element=" switch">
+                        <ui-element></ui-element>
+                    </div>
+                    <div ctrl-show:console="switch">
+                        <ui-console></ui-console>
+                    </div>
+                    <div ctrl-show:network="switch">
+                        <ui-network></ui-network>
+                    </div>
+                    <div ctrl-show:application="switch">
+                        <ui-application></ui-application>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+
+    // 当前页面用到的局部组件
+    import uiMenu from './component/ui-menu.iCrush';/*主窗口菜单*/
+    import uiWinBtn from './component/ui-win-btn.iCrush';/*窗口右侧按钮*/
+    import uiSwitch from './component/ui-switch.iCrush';/*功能切换*/
+    import uiElement from './component/ui-element.iCrush';
+    import uiConsole from './component/ui-console.iCrush';
+    import uiNetwork from './component/ui-network.iCrush';
+    import uiApplication from './component/ui-application.iCrush';
+    import uiPhoneShow from './component/ui-phone-show.iCrush';/*手机页面显示*/
+
+    import image2D from 'image2d';
+
+    export default {
+
+        data() {
+            return {
+                notFocus: false,
+                switch: "element"
+            };
+        },
+
+        mounted() {
+
+            // 功能切换
+            this.on('switch', flag => {
+                this.switch = flag;
+            });
+
+            nodeRequire('electron').ipcRenderer
+
+                // 监听到窗口失去焦点
+                .on("browser-window-blur", () => { this.notFocus = true; })
+
+                // 监听到窗口获得焦点
+                .on("browser-window-focus", () => { this.notFocus = false; });
+
+        },
+
+        // 挂载局部组件
+        component: { uiMenu, uiWinBtn, uiSwitch, uiElement, uiConsole, uiNetwork, uiApplication, uiPhoneShow },
+
+        methods: {
+
+        }
+    };
+</script>
+<style>
+    div.view {
+        font-size: .12rem;
+        user-select: none;
+
+        &>.menu {
+            background-color: #d6cfe2;
+            height: .3rem;
+            line-height: .3rem;
+            color: #747179;
+            position: relative;
+
+            &>.left {
+                left: 0;
+                background-image: url('./assets/images/logo.jpg');
+                background-position: .07rem center;
+                background-size: auto 70%;
+                padding-left: .4rem;
+                background-repeat: no-repeat;
+                height: 100%;
+            }
+
+            &>.right {
+                right: 0;
+            }
+
+            &>.left,
+            &>.right {
+                top: 0;
+                position: absolute;
+            }
+
+            &>.title {
+                text-align: center;
+            }
+        }
+
+        &>.content {
+            height: calc(100vh - .3rem);
+
+            &>div {
+                display: inline-block;
+                height: 100%;
+                vertical-align: top;
+
+                &.phoneShow {
+                    width: 3rem;
+                    background-color: red;
+                }
+
+                &.debugShow {
+                    width: calc(100vw-3rem);
+
+                    &>.switch {
+                        background-color: #ededf5;
+                        width: 100%;
+                        height: .3rem;
+                    }
+                }
+            }
+        }
+
+    }
+</style>

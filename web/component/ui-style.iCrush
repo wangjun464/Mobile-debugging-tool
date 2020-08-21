@@ -1,0 +1,22 @@
+<template>
+    <ul class="view">
+        <li class='style'>style</li>
+    </ul>
+</template>
+
+<script>
+    export default {
+        
+    }
+</script>
+<style>
+    ul.view{
+        &>.style{
+            font-size: .15rem;
+            height: .3rem;
+            line-height: .3rem;
+            margin-left:.1rem;
+            
+        }
+    }
+</style>

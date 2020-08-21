@@ -1,0 +1,76 @@
+<template>
+    <div class='view'>
+        <div>
+            <input type="button" id="elementCheck">
+        </div>
+        <div>
+            <input type="button" id="devTool">
+        </div>
+        <ul>
+            <li title='元素' class='element' ctrl-active-class:element="flag" @click='doIt("element")'>element</li>
+            <li title='控制台' class='console' ctrl-active-class:console="flag" @click='doIt("console")'>console</li>
+            <li title='网络' class='network' ctrl-active-class:network="flag" @click='doIt("network")'>network</li>
+            <li title='应用' class='application' ctrl-active-class:application="flag" @click='doIt("application")'>application</li>
+        </ul>
+    </div>
+</template>
+<script>
+    export default {
+        data() {
+            return {
+                flag: ["element","console","network","application"]
+            };
+        },
+        methods: {
+            doIt(flag) {
+                this.flag = flag;
+                this.trigger('switch', flag);
+            }
+        }
+    };
+</script>
+<style>
+    div.view {
+        width: 100%;
+        position: relative;
+
+        &>div {
+            display: inline-block;
+        }
+
+        &>div>input {
+            height: .3rem;
+            width: .3rem;
+            border: 0rem;
+        }
+
+        &>div>#elementCheck {
+            background-image: url('../assets/images/elementCheck.png');
+            background-repeat: no-repeat;
+            background-position-y: -0.05rem;
+
+        }
+
+        &>div>#devTool {
+            background-image: url('../assets/images/devTool.png');
+            background-repeat: no-repeat;
+            background-position-y: 0.05rem;
+        }
+
+        &>ul {
+            display: inline-block;
+            vertical-align: top;
+
+            &>li {
+                display: inline-block;
+                width: .8rem;
+                height: .3rem;
+                line-height: 0.3rem;
+
+                font-size: 13px;
+                padding-left: 0.1rem;
+            }
+        }
+
+    }
+</style>

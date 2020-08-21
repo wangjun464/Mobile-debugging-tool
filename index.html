@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Open Code Editor</title>
+    <link rel="shortcut icon" href="./web/assets/images/logo.png">
+    <script>
+
+        // 重新定义node.js暴露和web冲突的名称
+        window.nodeRequire = require;
+        delete window.require;
+        delete window.exports;
+        delete window.module;
+
+    </script>
+</head>
+
+<body>
+
+    <div id="root"></div>
+    <script src="./web/dist/main.js"></script>
+
+</body>
+
+<script>
+
+    // 判断操作系统类型
+    if (/Mac/.test(navigator.userAgent)) {
+        document.body.setAttribute('system', 'mac');
+    }
+
+</script>
+
+</html>
